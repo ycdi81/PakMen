@@ -5,44 +5,54 @@ using UnityEngine;
 public class Main : MonoBehaviour
 {
     PackMen pacman;
-    // Start is called before the first frame update
+    Fantasma fantasma;
+    IPersonajeControlable _personajeActivo;
+
     void Start()
     {
-       pacman = new PackMen();
-
+       _personajeActivo = pacman = new PackMen();
+        fantasma = new Fantasma(100, 100);
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            ComandoIzquierda c = new ComandoIzquierda();
-            c.Ejecutar(pacman);
+            ComandoIzquierda c = new ComandoIzquierda(_personajeActivo);
+            c.Ejecutar();
 
            
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            ComandoDerecha c = new ComandoDerecha();
-            c.Ejecutar(pacman);
+            ComandoDerecha c = new ComandoDerecha(_personajeActivo);
+            c.Ejecutar();
 
  
         }
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            ComandoArriba c = new ComandoArriba();
-            c.Ejecutar(pacman);
+            ComandoArriba c = new ComandoArriba(_personajeActivo);
+            c.Ejecutar();
 
 
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            ComandoAbajo c = new ComandoAbajo();
-            c.Ejecutar(pacman);
+            ComandoAbajo c = new ComandoAbajo(_personajeActivo);
+            c.Ejecutar();
 
 
         }
-        Debug.Log("X:" + pacman._posX + " Y:" + pacman._posY);
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (_personajeActivo == fantasma)
+                _personajeActivo = pacman;
+            else
+                _personajeActivo = fantasma;
+        }
+
     }
 }
