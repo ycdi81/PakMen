@@ -17,7 +17,32 @@ public class Main : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            pacman.mover(new ComandoIzquierda());
+            ComandoIzquierda c = new ComandoIzquierda();
+            c.Ejecutar(pacman);
+
+           
         }
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            ComandoDerecha c = new ComandoDerecha();
+            c.Ejecutar(pacman);
+
+ 
+        }
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            ComandoArriba c = new ComandoArriba();
+            c.Ejecutar(pacman);
+
+
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            ComandoAbajo c = new ComandoAbajo();
+            c.Ejecutar(pacman);
+
+
+        }
+        Debug.Log("X:" + pacman._posX + " Y:" + pacman._posY);
     }
 }

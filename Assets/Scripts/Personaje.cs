@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 interface IPersonajeControlable 
 {
-    public void Mover(ICommand command);
+    public void Mover(UnityEngine.Vector2 mov);
     public void Aparecer(int x, int y);
     public void Morir();
 
@@ -38,9 +38,10 @@ class PackMen : Personaje, IPersonajeControlable
         throw new System.NotImplementedException();
     }
 
-    public void Mover(ICommand command)
+    public void Mover(UnityEngine.Vector2 mov)
     {
-        command.Ejecutar();
+        _posX += (int)mov.x;
+        _posY += (int)mov.y;
     }
 }
 
@@ -61,9 +62,10 @@ class Fantasma : Personaje,IPersonajeControlable
         throw new System.NotImplementedException();
     }
 
-    public void Mover(ICommand command)
+    public void Mover(UnityEngine.Vector2 mov)
     {
-        throw new System.NotImplementedException();
+        _posX += (int)mov.x;
+        _posY += (int)mov.y;
     }
 
     public Fantasma(int x, int y)
@@ -76,32 +78,32 @@ class Fantasma : Personaje,IPersonajeControlable
 
 interface ICommand
 {
-    public void Ejecutar();
+    public void Ejecutar(IPersonajeControlable pers);
 }
 
 
 class ComandoArriba : ICommand
 {
-    void ICommand.Ejecutar() => UnityEngine.Debug.Log("Arriba");
+    public void Ejecutar(IPersonajeControlable pers) => pers.Mover(new UnityEngine.Vector2(0,-1));
 
 }
 
 class ComandoAbajo : ICommand
 {
-    void ICommand.Ejecutar() => UnityEngine.Debug.Log("Abajo");
+    public void Ejecutar(IPersonajeControlable pers) => pers.Mover(new UnityEngine.Vector2(0, 1));
 
 }
 
 class ComandoDerecha : ICommand
 {
-    void ICommand.Ejecutar() => UnityEngine.Debug.Log("Derecha");
+    public void Ejecutar(IPersonajeControlable pers) => pers.Mover(new UnityEngine.Vector2(1, 0));
 
 }
 
 class ComandoIzquierda : ICommand
 {
-    void ICommand.Ejecutar() => UnityEngine.Debug.Log("Izquierda");
-   
+    public void Ejecutar(IPersonajeControlable pers) => pers.Mover(new UnityEngine.Vector2(-1, 0));
+
     //lets begin 23423
 }
 
