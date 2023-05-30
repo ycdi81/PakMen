@@ -102,7 +102,7 @@ class ComandoIzquierda : ICommand
 {
     void ICommand.Ejecutar() => UnityEngine.Debug.Log("Izquierda");
    
-    //lets begin
+    //lets begin 23423
 }
 
 
